@@ -1,0 +1,309 @@
+﻿@inject AllSubmissionCRUDViewModel allSubmissionCRUDViewModel
+@inject NavigationManager NavigationManager
+
+<div>
+	<MudCard Elevation="5" >
+					<MudCardContent>
+						<EditForm OnValidSubmit="@HandleValidSubmit" Model="@allSubmission" style="margin-bottom: 40px; ">
+							<DataAnnotationsValidator />
+
+							<div class="row" style="padding-left: 40px; padding-right:40px">
+								<div class="col-md-12">
+									<div class="bs-stepper-content">
+										<!-- your steps content here -->
+										<div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+											<div class="row">
+												<div class="form-group col-md-6">
+													<MudTextField Label="Solution Name" Required="true" @bind-Value="@allSubmission.SolutionName" For="@(() => allSubmission.SolutionName)" />
+												</div>
+												<div class="form-group col-md-6">
+													<MudTextField Label="Application ID" Required="false" @bind-Value="@allSubmission.ApplicationID" For="@(() => allSubmission.ApplicationID)" />
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="form-group col-md-6">
+													<MudDatePicker PickerVariant="PickerVariant.Dialog" @bind-Date="@allSubmission.ForumDate" Label="Forum Date" Placeholder="Select Date" />
+												</div>
+												<div class="form-group col-md-6">
+													<MudSelect Label="Forum" @bind-Value="@allSubmission.Forum" Placeholder="Please Select" Required="true"
+															   AdornmentIcon="@Icons.Material.Filled.ArrowDropDown" AdornmentColor="Color.Primary">
+														<MudSelectItem Value="@("SAF")">SAF</MudSelectItem>
+														<MudSelectItem Value="@("CAF")">CAF</MudSelectItem>
+														<MudSelectItem Value="@("CIO")">CIO</MudSelectItem>
+														<MudSelectItem Value="@("Group ARB")">Group ARB</MudSelectItem>
+													</MudSelect>
+													<ValidationMessage For="@(() => allSubmission.Forum)" class="row" />
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-6">
+													<MudSelect Label="Review Type" @bind-Value="@allSubmission.ReviewType" Placeholder="Please Select" Required="true"
+															   AdornmentIcon="@Icons.Material.Filled.ArrowDropDown" AdornmentColor="Color.Primary">
+														<MudSelectItem Value="@("Final SAD")">Final SAD</MudSelectItem>
+														<MudSelectItem Value="@("On Premise")">On Premise</MudSelectItem>
+														<MudSelectItem Value="@("SaaS")">SaaS</MudSelectItem>
+														<MudSelectItem Value="@("PoC")">PoC</MudSelectItem>
+														<MudSelectItem Value="@("Public Cloud")">Public Cloud</MudSelectItem>
+														<MudSelectItem Value="@("Draft SAD")">Draft SAD</MudSelectItem>
+														<MudSelectItem Value="@("Hybrid")">Hybrid</MudSelectItem>
+														<MudSelectItem Value="@("SandBox")">SandBox</MudSelectItem>
+														<MudSelectItem Value="@("Cloud")">Cloud</MudSelectItem>
+														<MudSelectItem Value="@("Private Cloud")">Private Cloud</MudSelectItem>
+														<MudSelectItem Value="@("FaaS")">FaaS</MudSelectItem>
+														<MudSelectItem Value="@("Managed Service")">Managed Service</MudSelectItem>
+														<MudSelectItem Value="@("Web Page")">Web Page</MudSelectItem>
+														<MudSelectItem Value="@("End User Device (iOS)")">End User Device (iOS)</MudSelectItem>
+														<MudSelectItem Value="@("N/A")">N/A</MudSelectItem>
+														<MudSelectItem Value="@("Outsourced")">Outsourced</MudSelectItem>
+													</MudSelect>
+													<ValidationMessage For="@(() => allSubmission.ReviewType)" class="row" />
+												</div>
+												<div class="form-group col-md-6">
+													<MudSelect Label="Request Type" @bind-Value="@allSubmission.RequestType" Placeholder="Please Select" Required="true"
+															   AdornmentIcon="@Icons.Material.Filled.ArrowDropDown" AdornmentColor="Color.Primary">
+														<MudSelectItem Value="@("POC")">POC</MudSelectItem>
+														<MudSelectItem Value="@("DEV/TEST")">DEV/TEST</MudSelectItem>
+														<MudSelectItem Value="@("PROD")">PROD</MudSelectItem>
+													</MudSelect>
+													<ValidationMessage For="@(() => allSubmission.ReviewType)" class="row" />
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-6">
+													<MudSelect Label="Business Division Level 1" @bind-Value="@allSubmission.BusinessDivision" Placeholder="Please Select" Required="true"
+															   AdornmentIcon="@Icons.Material.Filled.ArrowDropDown" AdornmentColor="Color.Primary">
+														<MudSelectItem Value="@("Capital Markets")">Capital Markets</MudSelectItem>
+														<MudSelectItem Value="@("Data & Analytics")">Data & Analytics</MudSelectItem>
+														<MudSelectItem Value="@("Post Trade")">Post Trade</MudSelectItem>
+														<MudSelectItem Value="@("Group Functions")">Group Functions</MudSelectItem>
+													</MudSelect>
+													<ValidationMessage For="@(() => allSubmission.BusinessDivision)" class="row" />
+												</div>
+												<div class="form-group col-md-6">
+													<MudSelect Label="Business Division Level 2" @bind-Value="@allSubmission.BusinessDivisionLevel2" Placeholder="Please Select" Required="true"
+															   AdornmentIcon="@Icons.Material.Filled.ArrowDropDown" AdornmentColor="Color.Primary">
+														<MudSelectItem Value="@("Capital Markets")">Capital Markets</MudSelectItem>
+														<MudSelectItem Value="@("Data & Analytics")">Data & Analytics</MudSelectItem>
+														<MudSelectItem Value="@("Post Trade")">Post Trade</MudSelectItem>
+														<MudSelectItem Value="@("Group Functions")">Group Functions</MudSelectItem>
+													</MudSelect>
+													<ValidationMessage For="@(() => allSubmission.BusinessDivisionLevel2)" class="row" />
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-6">
+													<MudSelect Label="Data Steward" @bind-Value="@allSubmission.DataSteward" Placeholder="Please Select" Required="true"
+															   AdornmentIcon="@Icons.Material.Filled.ArrowDropDown" AdornmentColor="Color.Primary">
+														<MudSelectItem Value="@("Diane.Schmidt@lseg.com")">Diane.Schmidt@lseg.com</MudSelectItem>
+														<MudSelectItem Value="@("Edward.Pok@lseg.com")">Edward.Pok@lseg.com</MudSelectItem>
+														<MudSelectItem Value="@("Krishamili.Naidu@lseg.com")">Krishamili.Naidu@lseg.com</MudSelectItem>
+														<MudSelectItem Value="@("Anitha.Kuppusamy@lseg.com")">Anitha.Kuppusamy@lseg.com</MudSelectItem>
+														<MudSelectItem Value="@("Savindu.Chamika@lseg.com")">Savindu.Chamika@lseg.com</MudSelectItem>
+														<MudSelectItem Value="@("Shivam.Sharma@lseg.com")">Shivam.Sharma@lseg.com</MudSelectItem>
+														<MudSelectItem Value="@("Hasitha.Karunaratne@lseg.com")">Hasitha.Karunaratne@lseg.com</MudSelectItem>
+														<MudSelectItem Value="@("indudhar.gowda@lseg.com")">indudhar.gowda@lseg.com</MudSelectItem>
+													</MudSelect>
+													<ValidationMessage For="@(() => allSubmission.DataSteward)" class="row" />
+
+												</div>
+												<div class="form-group col-md-6">
+													<MudTextField Label="Data Operation Contact" Required="true" @bind-Value="@allSubmission.DataOperationsContact" For="@(() => allSubmission.DataOperationsContact)" />
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-6">
+													<MudSelect Label="Executive Sponsor" @bind-Value="@allSubmission.ExecutiveSponsor" Placeholder="Please Select" Required="true"
+															   AdornmentIcon="@Icons.Material.Filled.ArrowDropDown" AdornmentColor="Color.Primary">
+														<MudSelectItem Value="@("Diane.Schmidt@lseg.com")">Diane.Schmidt@lseg.com</MudSelectItem>
+														<MudSelectItem Value="@("Edward.Pok@lseg.com")">Edward.Pok@lseg.com</MudSelectItem>
+														<MudSelectItem Value="@("Krishamili.Naidu@lseg.com")">Krishamili.Naidu@lseg.com</MudSelectItem>
+														<MudSelectItem Value="@("Anitha.Kuppusamy@lseg.com")">Anitha.Kuppusamy@lseg.com</MudSelectItem>
+														<MudSelectItem Value="@("Savindu.Chamika@lseg.com")">Savindu.Chamika@lseg.com</MudSelectItem>
+														<MudSelectItem Value="@("Shivam.Sharma@lseg.com")">Shivam.Sharma@lseg.com</MudSelectItem>
+														<MudSelectItem Value="@("Hasitha.Karunaratne@lseg.com")">Hasitha.Karunaratne@lseg.com</MudSelectItem>
+														<MudSelectItem Value="@("indudhar.gowda@lseg.com")">indudhar.gowda@lseg.com</MudSelectItem>
+													</MudSelect>
+													<ValidationMessage For="@(() => allSubmission.ExecutiveSponsor)" class="row" />
+												</div>
+												<div class="form-group col-md-6">
+													<MudTextField Label="Clarity Code" Required="true" @bind-Value="@allSubmission.ClarityCode" For="@(() => allSubmission.ClarityCode)" />
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="form-group col-md-6">
+													<label for="CriticalityQuestions">Criticality Questions Response</label>
+													<MudRadioGroup @bind-SelectedOption="@allSubmission.CriticalityQuestions">
+														<MudRadio Option="@("Yes")" Color="Color.Primary">Yes</MudRadio>
+														<MudRadio Option="@("No")" Color="Color.Secondary">No</MudRadio>
+														<MudRadio Option="@("Not Applicable")" Color="Color.Tertiary">Not Applicable</MudRadio>
+													</MudRadioGroup>
+
+												</div>
+												<div class="form-group col-md-6">
+													<label for="PSRChecklistQuestions">PSR Checklist Questions Response</label>
+													<MudRadioGroup @bind-SelectedOption="@allSubmission.PSRChecklistQuestions">
+														<MudRadio Option="@("Yes")" Color="Color.Primary">Yes</MudRadio>
+														<MudRadio Option="@("No")" Color="Color.Secondary">No</MudRadio>
+														<MudRadio Option="@("Not Applicable")" Color="Color.Tertiary">Not Applicable</MudRadio>
+													</MudRadioGroup>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-6">
+													<label for="UploadSADDocument">Upload SAD Document</label>
+													<div>
+														<label style="
+        box-shadow: 0 2px 7px #4caf50;
+        display: inline-flex;
+        width: 150px;
+        justify-content: space-around;
+        border-radius: 2em;
+        color: white;
+        border:2px solid;
+        cursor: pointer;
+        align-items: center;
+        padding:16px;
+        background-color: #4caf50;"
+															   for="fileInput2">
+															Upload <MudIcon Icon="@Icons.Filled.CloudUpload" />
+														</label>
+
+														<InputFile id="fileInput2" OnChange="UploadFiles" hidden multiple />
+
+														@if (files != null)
+														{
+															<MudList>
+																@foreach (var file in files)
+																{
+																	<MudListItem Icon="@Icons.Filled.AttachFile">
+																		@file.Name <code>@file.Size bytes</code>
+																	</MudListItem>
+																}
+															</MudList>
+														}
+													</div>
+
+												</div>
+												<div class="form-group col-md-6">
+													<label for="Uploadotherattachment">Upload other attachment</label>
+													<div>
+														<label style="
+        box-shadow: 0 2px 7px #4caf50;
+        display: inline-flex;
+        width: 150px;
+        justify-content: space-around;
+        border-radius: 2em;
+        color: white;
+        border:2px solid;
+        cursor: pointer;
+        align-items: center;
+        padding:16px;
+        background-color: #4caf50;"
+															   for="fileInput2">
+															Upload <MudIcon Icon="@Icons.Filled.CloudUpload" />
+														</label>
+
+														<InputFile id="fileInput3" OnChange="UploadFiles" hidden multiple />
+
+														@if (files != null)
+														{
+															<MudList>
+																@foreach (var file in files)
+																{
+																	<MudListItem Icon="@Icons.Filled.AttachFile">
+																		@file.Name <code>@file.Size bytes</code>
+																	</MudListItem>
+																}
+															</MudList>
+														}
+													</div>
+
+												</div>
+											</div>
+
+
+
+											<div class="row">
+
+												<div class="form-group col-md-6">
+													<label for="DataContentSolution">Data Content in this solution</label>
+													<textarea class="form-control" rows="3" @bind="@allSubmission.DataContentSolution" placeholder="Enter ..."></textarea>
+													<div style="margin-top: 10px; ">
+														<ValidationMessage For="@(() => allSubmission.DataContentSolution)" />
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label>Comments</label>
+													<textarea class="form-control" rows="3" @bind="@allSubmission.Comments" placeholder="Enter ..."></textarea>
+												</div>
+											</div>
+											<button class="btn btn-info" type="submit">Submit</button>
+											@*<input type="button" class="btn btn-info" @onclick="@CreateSubmission" value="Save" />*@
+											<input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</EditForm>
+					</MudCardContent>
+				</MudCard>
+</div>
+
+
+@code {
+	AllSubmission allSubmission = new AllSubmission();
+
+
+	public string RequestTypeValue { get; set; }
+	public string BusinessDivisionLevel1Value { get; set; }
+	public string BusinessDivisionLevel2Value { get; set; }
+	public string ExecutiveSponsorValue { get; set; }
+	public string DataStewardValue { get; set; }
+
+	private async void HandleValidSubmit()
+	{
+
+		allSubmission.RequestType = RequestTypeValue;
+		allSubmission.ExecutiveSponsor = ExecutiveSponsorValue;
+		allSubmission.DataSteward = DataStewardValue;
+		allSubmission.BusinessDivision = BusinessDivisionLevel1Value;
+		allSubmission.BusinessDivisionLevel2 = BusinessDivisionLevel2Value;
+		if (allSubmission.ClarityCode == null) allSubmission.ClarityCode = "Empty";
+		if (allSubmission.Comments == null) allSubmission.Comments = "Empty";
+		if (allSubmission.ApplicationID == null) allSubmission.ApplicationID = "Empty";
+		allSubmission.SubmittedDate = DateTime.Now.ToString();
+		await allSubmissionCRUDViewModel.InsertSubmissionAsync(allSubmission);
+		NavigationManager.NavigateTo("View All Evaluation");
+	}
+
+	protected async void CreateSubmission()
+	{
+
+		allSubmission.BusinessDivision = BusinessDivisionLevel1Value;
+		allSubmission.BusinessDivisionLevel2 = BusinessDivisionLevel2Value;
+		await allSubmissionCRUDViewModel.InsertSubmissionAsync(allSubmission);
+		NavigationManager.NavigateTo("View All Evaluation");
+	}
+	void Cancel()
+	{
+		NavigationManager.NavigateTo("View All Evaluation");
+	}
+
+
+	IList<IBrowserFile> files = new List<IBrowserFile>();
+	private void UploadFiles(InputFileChangeEventArgs e)
+	{
+		foreach (var file in e.GetMultipleFiles())
+		{
+			files.Add(file);
+		}
+		//TODO upload the files to the server
+	}
+
+
+        }
+

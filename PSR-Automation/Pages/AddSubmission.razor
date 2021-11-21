@@ -1,0 +1,70 @@
+﻿@page "/AddSubmission"
+@using MComponents.MWizard
+
+
+<br />
+<br />
+<h2 style="margin-top:-40px">Submit New Evaluation </h2>
+<br />
+
+
+<MComponents.MWizard.MWizard>
+	<Steps>
+		<MComponents.MWizard.MWizardStep Identifier="1" Title="Solution Details" style="width: 100%;" StepContext="MyProperty" >
+			<Content>
+				<PSR_Automation.Components.AddSubmissionComponent />
+			</Content>
+		</MComponents.MWizard.MWizardStep>
+
+		<MComponents.MWizard.MWizardStep Identifier="2" Title="Upload Document" onclick="UploadClick">
+			<Content>
+
+			</Content>
+		</MComponents.MWizard.MWizardStep>
+
+		<MComponents.MWizard.MWizardStep Identifier="3" Title="Critical Assessment">
+			<Content>
+
+			</Content>
+		</MComponents.MWizard.MWizardStep>
+		<MComponents.MWizard.MWizardStep Identifier="4" Title="PSR Checklist Assignment">
+			<Content>
+
+			</Content>
+		</MComponents.MWizard.MWizardStep>
+	</Steps>
+</MComponents.MWizard.MWizard>
+
+
+
+@code {
+
+
+	public MWizard sssss { get; set; }
+	private MWizardStepContext myProperty;
+	public MWizardStepContext MyProperty
+	{
+		get { 
+			if(myProperty.CurrentStep != null)
+			{
+
+				sssss = (MWizard)myProperty.CurrentStep.Wizard;
+				//sssss.SetCurrentStep(3, true);
+			}
+			return myProperty; 
+		}
+		set {		
+
+			myProperty = value; 			
+
+		}
+	}
+
+
+	protected override async Task OnInitializedAsync()
+	{
+		MyProperty = new MWizardStepContext();
+		sssss = new MWizard();
+	}
+
+}

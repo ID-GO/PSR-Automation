@@ -1,0 +1,46 @@
+﻿@page "/"
+
+<h1>Welcome to PSR Automation!</h1>
+
+<div class="col-md-9">
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link active" href="#overview" data-toggle="tab">Overview</a></li>
+                <li class="nav-item"><a class="nav-link" href="#processflow" data-toggle="tab">Process Flow</a></li>
+
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content">
+                <div class="active tab-pane" id="overview">
+                    <h6 class="card-title">What is PSR Change Management Process ? </h6>
+                    <p class="card-text">
+                        PSR Change Management Process is one where the DGO reviews architecturally significant changes through
+                        the change framework. Using checklist that is aligned the policy and standards.
+                        DGO reviews the in scope prjects and produces a Conformance Score Card. This scorecard is sent to
+                        the project lead as there may be activities that further required action.
+                    </p>
+                    <a href="AddSubmission" class="btn btn-primary">Submit New Solution</a>
+
+                    <a href="pages/forms/Existing Submission Form.html" class="btn btn-info">Resubmit Existing Solution</a>
+                </div>
+
+
+
+                <div class="tab-pane" id="processflow">
+                    <div class="col-sm-12">
+                        <h5>Submit New Solution</h5>
+                        <img class="img-fluid mb-3" src="newprocessflow.jpg" alt="Photo">
+                        <h5>
+                            Submit Existing Solution<!--53-->
+                            <img class="img-fluid mb-3" src="existprocessflow.jpg" alt="Photo">
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.card -->
+</div>

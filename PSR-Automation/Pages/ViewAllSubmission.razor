@@ -1,0 +1,52 @@
+﻿@page "/View All Evaluation" 
+@inject AllSubmissionCRUDViewModel allSubmissionCRUDViewModel
+    <MudThemeProvider />
+    <MudDialogProvider />
+    <MudSnackbarProvider />
+
+    <h1>Submission Info</h1>
+    @if (SubmissionObj is null)
+    {
+        <p><em>Loading... !</em></p> }
+    else
+    {
+ 
+    <MudTable    Items="@SubmissionObj" Hover="true" HorizontalScrollbar="true"  Breakpoint="Breakpoint.Sm" FixedHeader="true"   Height="500px"
+              LoadingProgressColor="Color.Info">
+        <HeaderContent >
+            <MudTh Style="background-color:black; color:white"  >SolutionName</MudTh>
+            <MudTh Style="background-color:black; color:white"  >ApplicationID</MudTh>
+            <MudTh Style="background-color:black; color:white"  >Forum</MudTh>
+            <MudTh Style="background-color:black; color:white" >ForumDate</MudTh>
+            <MudTh Style="background-color:black; color:white" >BusinessDivision</MudTh>
+            <MudTh Style="background-color:black; color:white" >DataOperationsContact</MudTh>
+            <MudTh Style="background-color:black; color:white" >CriticalityQuestions</MudTh>
+            <MudTh Style="background-color:black; color:white" >ChecklistQuestions</MudTh>
+            <MudTh Style="background-color:black; color:white" >ExecutiveSponsor</MudTh>             
+            <MudTh Style="background-color:black; color:white">Comments</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="SolutionName">@context.SolutionName</MudTd>
+            <MudTd DataLabel="ApplicationID">@context.ApplicationID</MudTd>
+            <MudTd DataLabel="Forum">@context.Forum</MudTd>
+            <MudTd DataLabel="ForumDate">@context.ForumDate</MudTd>
+            <MudTd DataLabel="BusinessDivision">@context.BusinessDivision</MudTd>
+            <MudTd DataLabel="DataOperationsContact">@context.DataOperationsContact</MudTd>
+            <MudTd DataLabel="CriticalityQuestions">@context.CriticalityQuestions</MudTd>
+            <MudTd DataLabel="ChecklistQuestions">@context.PSRChecklistQuestions</MudTd>
+            <MudTd DataLabel="ExecutiveSponsor">@context.ExecutiveSponsor</MudTd>
+          
+            <MudTd DataLabel="Comments">@context.Comments</MudTd>
+        </RowTemplate>
+    </MudTable>    
+
+    }
+
+
+
+    @code { List<AllSubmission> SubmissionObj;
+        protected override async Task OnInitializedAsync()
+        {
+            SubmissionObj = await Task.Run(() => allSubmissionCRUDViewModel.GetAllSubmissionsAsync());
+            SubmissionObj = SubmissionObj.OrderByDescending(o => o.SubmittedDate).ToList();
+        } }
